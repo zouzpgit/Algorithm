@@ -91,7 +91,7 @@ class OperationFactory{
 		}
 };
 
-/*int main() {
+int main() {
 
 	OperationFactory operate ;
 	Operation* oper;
@@ -100,4 +100,4 @@ class OperationFactory{
 	oper->numberB = 0.0;
 	double result = oper->GetResult();
 	return 0;
-}*/
+}
