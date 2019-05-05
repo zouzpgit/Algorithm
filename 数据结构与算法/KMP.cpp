@@ -48,7 +48,7 @@ int Index_KMP(string S,string  T,int pos)
 	get_next(T, Next);
 
 	/* 循环继续 */
-	while (i <= S.size() && j <= T.size())
+	while (i < S.size() && j < T.size())
 	{
 		/* 两字⺟相等则继续，相对于朴素算法增加了 */
 		/* j=0判断 */
@@ -64,11 +64,12 @@ int Index_KMP(string S,string  T,int pos)
 			j = Next[j];
 		}
 	}
-	if (j > T.size())
-		return i - T.size()-1;
-	else
-		return 0;
+	if (j >=T.size())  //目标字符串已经找完
+		return i - T.size();
+	else               //否则就是没有找到
+		return -1;
 }
+
 
 int main()
 {
