@@ -24,6 +24,8 @@ ListNode* FindKthToTail(ListNode* pListHead, unsigned int k){
 			ahead = ahead->next;
 			i++;
 		}
+		else //K步还没走完，结果直接到头了，所以返回null
+			return nullptr;
 
 	}
 	while (ahead){
