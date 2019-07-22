@@ -12,21 +12,34 @@ struct ListNode {
 
 ListNode* EntryNodeOfLoop(ListNode* pHead)
 {
-	if (pHead == NULL || pHead->next == NULL)
-		return NULL;
+	//if (pHead == NULL || pHead->next == NULL)
+		//return NULL;
 	ListNode *fast, *slow, *mark = nullptr;
-	int N = 0;
 	slow = pHead;
 	fast = pHead->next;
-	while (fast != NULL&&slow != NULL&&fast != slow)
+	while (1)
 	{
+		if (fast == NULL || slow == NULL)
+			return NULL;
 		fast = fast->next;
 		slow = slow->next;
+
 		if (fast != slow)
 			fast = fast->next; //再多走一步
+		else  // 有环
+		{
+			mark = slow; break;
+		}
+			
 	}
-
-	fast = slow = pHead->next;
+	ListNode *p = mark->next;
+	int N = 1;
+	while (p!=mark)
+	{
+		p = p->next;
+		N++;
+	}
+	fast = slow = pHead;
 	for (int i = 0; i < N; i++){  //让fast指针先走N步
 		fast = fast->next;
 	}
@@ -36,10 +49,4 @@ ListNode* EntryNodeOfLoop(ListNode* pHead)
 		slow = slow->next;
 	}
 	return slow;
-}
-
-int main()
-{
-
-	return 0;	
 }
