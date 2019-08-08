@@ -5,13 +5,13 @@
 
 using namespace std;
 /*
-* @brief 0-1 背包二维空间解法
+* @brief 原始的 0-1 背包问题
 * 给定一系列物品的重量的和价值，在给定背包可承重量下，选择某些物品装入背包，使得装入背包的价值最大
 * 每个物品，要么取要么不取
 *
-* @param w : 物品重量（数组）           -->C[i][0]:第i轮的游戏总数
-* @param v : 物品价值（数组）           -->TG[i][0]:第i轮第积分值（），TG[i][1]:第i轮第时间花费
-* @param vol : 背包可承重量             -->C[i][1]:第i轮的游戏总时间限制
+* @param weight : 物品重量（数组）          
+* @param value : 物品价值（数组）           
+* @param vol : 背包可承重量             
 * @return 最大可能的价值
 */
 
@@ -27,14 +27,15 @@ using namespace std;
 * 18 3
 * 10 2
 * 本题其实就是一个最简单的0 1 背包  二维空间解法
-* -->C[i][0]:第i轮的游戏总数
-* -->TG[i][0]:第i轮第积分值（），TG[i][1]:第i轮第时间花费
-*-->C[i][1]:第i轮的游戏总时间限制
+* -->C[i][0]:第i轮的游戏总数  ，C[i][1]:第i轮的游戏总时间限制
+* -->TG[i][0]:第i轮第积分值（），TG[i][1]:第i轮第时间花费 数组）数组第一位没有预装0，有效数据是从0开始的，因此TG[i-1+m]要从i-1开始（即从0开始）
 */
 
+
+//用二维数组存放输入数据真是脑阔疼，真是没必要
 vector<int > bestgame(vector<vector<int > > &TG, vector<vector<int> > &C, int N){
 	vector<int > res;
-	int k = 0, m = 0;//m pianyililang
+	int k = 0, m = 0;//m 偏移量
 	while (k < N){
 		int casenum = C[k][0], casetime = C[k][1];//该轮总游戏局数和总时间
 		vector<vector<int >> dp(casenum + 1, vector<int>(casetime + 1, 0));
@@ -56,8 +57,8 @@ vector<int > bestgame(vector<vector<int > > &TG, vector<vector<int> > &C, int N)
 
 //用一维数组存储输入数据是真的很爽啊  二维空间解法
 /*
-* @param gamev :   游戏积分值
-* @param gamet :   游戏耗费时间
+* @param gamev :   游戏积分值（数组）数组第一位没有预装0
+* @param gamet :   游戏耗费时间（数组）数组第一位没有预装0，有效数据是从0开始的，因此gamet[i-1]要从i-1开始（即从0开始）
 * @param Ttime :	总时间限制
 * @return 最大可能的价值
 */
